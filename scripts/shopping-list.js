@@ -17,6 +17,9 @@ const generateItemElement = function (item) {
     <li class="js-item-element" data-item-id="${item.id}">
       ${itemTitle}
       <div class="shopping-item-controls">
+        <button class="shopping-item-edit js-item-edit">
+        <span class="button-label">edit</span>
+        </button>
         <button class="shopping-item-toggle js-item-toggle">
           <span class="button-label">check</span>
         </button>
@@ -131,12 +134,21 @@ const handleEditShoppingItemSubmit = function () {
   });
 };
 
+const handleEditClick = function() {
+  $('.js-shopping-list').on('click', '.js-item-edit', function(evt) {
+    evt.preventDefault();
+    let chosen = $(evt.currentTarget).closest('.shopping-item')
+    chosen.focus()
+  });
+};
+
 const bindEventListeners = function () {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
+  handleEditClick;
 };
 
 // This object contains the only exposed methods from this module:
